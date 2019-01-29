@@ -22,7 +22,7 @@ for i in range(10000):
         t = time.time()
         print(int(round(t * 1000)))
         print(i / 100)
-    batch_xs, batch_ys = mnist.train.next_batch(100)
+    batch_xs, batch_ys = mnist.train.next_batch(10000)
     train_step.run({x: batch_xs, y_: batch_ys})
 
 

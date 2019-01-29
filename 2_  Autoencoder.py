@@ -18,13 +18,13 @@ class AdditiveGaussianNoiseAutoencoder(object):
         self.transfer = transfer_function
         self.scale = tf.placeholder(tf.float32)
         self.training_scale = scale
-        network_weights = self.initialize_weights()
+        network_weights = self._initialzie_weights()
         self.weights = network_weights
 
         self.x = tf.placeholder(tf.float32, [None, self.n_input])
         self.hidden = self.transfer(tf.add(tf.matmul(self.x + scale * tf.random_normal((n_input,)),
                                                      self.weights['w1']), self.weights['b1']))
-        self.reconstruction = tf.adsd(tf.matmul(self.hidden,
+        self.reconstruction = tf.add(tf.matmul(self.hidden,
                                                 self.weights['w2']), self.weights['b2'])
         self.cost = 0.5 * tf.reduce_sum(tf.pow(tf.subtract(self.reconstruction, self.x), 2.0))
         self.optimizer = optimizer.minimize(self.cost)
@@ -77,6 +77,11 @@ def standard_scale(X_train, X_test):
     return X_train, X_test
 
 
+def get_random_block_from_data(data, batch_size):
+    start_index = np.random.randint(0, len(data) - batch_size)
+    return data[start_index: (start_index + batch_size)]
+
+
 X_train, X_test = standard_scale(mnist.train.images, mnist.test.images)
 n_samples = int(mnist.train.num_examples)
 training_epochs = 20
@@ -87,4 +92,19 @@ autoencoder = AdditiveGaussianNoiseAutoencoder(n_input=784,
                                                transfer_function=tf.nn.softplus,
                                                optimizer=tf.train.AdamOptimizer(learning_rate=0.001),
                                                scale=0.01)
+
+for epoch in range(training_epochs):
+    avg_cost = 0
+    total_batch = int(n_samples / batch_size)
+    for i in range(total_batch):
+        batch_xs = get_random_block_from_data(X_train, batch_size)
+
+        cost = autoencoder.partial_fit(batch_xs)
+        avg_cost += cost / n_samples * batch_size
+
+    if epoch % display_step == 0:
+        print("Epoch: ", '%04d' % (epoch + 1), "cost = ",
+              "{:.9f}".format(avg_cost))
+
+print("Total cost: " + str(autoencoder.calc_total_cost(X_test)))
 
