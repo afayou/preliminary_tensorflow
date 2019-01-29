@@ -2,6 +2,7 @@
   <dictionary name="afayou">
     <words>
       <w>autoencoder</w>
+      <w>getweights</w>
       <w>initialzie</w>
       <w>mnist</w>
     </words>

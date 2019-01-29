@@ -25,7 +25,7 @@ class AdditiveGaussianNoiseAutoencoder(object):
         self.hidden = self.transfer(tf.add(tf.matmul(self.x + scale * tf.random_normal((n_input,)),
                                                      self.weights['w1']), self.weights['b1']))
         self.reconstruction = tf.add(tf.matmul(self.hidden,
-                                                self.weights['w2']), self.weights['b2'])
+                                               self.weights['w2']), self.weights['b2'])
         self.cost = 0.5 * tf.reduce_sum(tf.pow(tf.subtract(self.reconstruction, self.x), 2.0))
         self.optimizer = optimizer.minimize(self.cost)
 
@@ -43,7 +43,7 @@ class AdditiveGaussianNoiseAutoencoder(object):
 
     def partial_fit(self, X):
         cost, opt = self.sess.run((self.cost, self.optimizer),
-                                  feed_dit={self.x: X, self.scale: self.training_scale})
+                                  feed_dict={self.x: X, self.scale: self.training_scale})
         return cost
 
     def calc_total_cost(self, X):
@@ -71,6 +71,7 @@ mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 
 def standard_scale(X_train, X_test):
+
     preprocessor = prep.StandardScaler().fit(X_train)
     X_train = preprocessor.transform(X_train)
     X_test = preprocessor.transform(X_test)
