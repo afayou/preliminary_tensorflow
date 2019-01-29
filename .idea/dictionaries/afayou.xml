@@ -5,6 +5,9 @@
       <w>getweights</w>
       <w>initialzie</w>
       <w>mnist</w>
+      <w>regession</w>
+      <w>softmax</w>
+      <w>tensorflow</w>
     </words>
   </dictionary>
 </component>

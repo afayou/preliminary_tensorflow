@@ -85,14 +85,14 @@ def get_random_block_from_data(data, batch_size):
 
 X_train, X_test = standard_scale(mnist.train.images, mnist.test.images)
 n_samples = int(mnist.train.num_examples)
-training_epochs = 20
+training_epochs = 40
 batch_size = 128
 display_step = 1
 autoencoder = AdditiveGaussianNoiseAutoencoder(n_input=784,
                                                n_hidden=200,
                                                transfer_function=tf.nn.softplus,
                                                optimizer=tf.train.AdamOptimizer(learning_rate=0.001),
-                                               scale=0.01)
+                                               scale=0.001)
 
 for epoch in range(training_epochs):
     avg_cost = 0
