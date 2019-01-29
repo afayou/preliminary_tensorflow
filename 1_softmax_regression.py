@@ -16,13 +16,13 @@ y_ = tf.placeholder(tf.float32, [None, 10])
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
 train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
 tf.global_variables_initializer().run()
-for i in range(10000):
+for i in range(1000):
 
     if i % 100 == 0:
         t = time.time()
         print(int(round(t * 1000)))
         print(i / 100)
-    batch_xs, batch_ys = mnist.train.next_batch(10000)
+    batch_xs, batch_ys = mnist.train.next_batch(100)
     train_step.run({x: batch_xs, y_: batch_ys})
 
 
