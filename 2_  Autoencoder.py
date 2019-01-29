@@ -29,7 +29,7 @@ class AdditiveGaussianNoiseAutoencoder(object):
         self.cost = 0.5 * tf.reduce_sum(tf.pow(tf.subtract(self.reconstruction, self.x), 2.0))
         self.optimizer = optimizer.minimize(self.cost)
 
-        init = tf.global_variables_initializer()()
+        init = tf.global_variables_initializer()
         self.sess = tf.Session()
         self.sess.run(init)
 
