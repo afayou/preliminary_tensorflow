@@ -2,10 +2,12 @@
   <dictionary name="afayou">
     <words>
       <w>autoencoder</w>
+      <w>conv</w>
       <w>getweights</w>
       <w>initialzie</w>
       <w>mnist</w>
       <w>numpay</w>
+      <w>predicition</w>
       <w>regession</w>
       <w>relu</w>
       <w>softmax</w>
