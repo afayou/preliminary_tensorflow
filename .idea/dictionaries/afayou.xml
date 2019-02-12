@@ -2,9 +2,11 @@
   <dictionary name="afayou">
     <words>
       <w>autoencoder</w>
+      <w>cifar</w>
       <w>conv</w>
       <w>getweights</w>
       <w>initialzie</w>
+      <w>logits</w>
       <w>mnist</w>
       <w>numpay</w>
       <w>predicition</w>
