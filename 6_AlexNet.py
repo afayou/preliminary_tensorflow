@@ -92,7 +92,7 @@ def time_tensorflow_run(session, target, info_string):
             total_duration_squared += duration * duration
 
     mn = total_duration / num_batches
-    vr = total_duration_squared /num_batches - mn * mn
+    vr = total_duration_squared / num_batches - mn * mn
     sd = math.sqrt(vr)
     print('%s: %s across %d steps, %.3f +/- %.3f sec / batch' % (datetime.now(), info_string, num_batches, mn, sd))
 
