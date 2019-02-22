@@ -5,16 +5,20 @@
       <w>autoencoder</w>
       <w>cifar</w>
       <w>conv</w>
+      <w>esiplon</w>
       <w>getweights</w>
       <w>initialzie</w>
       <w>logits</w>
       <w>mnist</w>
       <w>mpool</w>
       <w>numpay</w>
+      <w>postnorm</w>
+      <w>preact</w>
       <w>predicition</w>
       <w>regession</w>
       <w>relu</w>
       <w>resh</w>
+      <w>resnet</w>
       <w>softmax</w>
       <w>tensorflow</w>
     </words>

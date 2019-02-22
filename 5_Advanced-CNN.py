@@ -1,11 +1,12 @@
-import cifar10, cifar10_input
+import cifar10
+import cifar10_input
 import tensorflow as tf
 import math
 import numpy as np
 import time
 
 # 定义训练轮数，每轮处理的数据量，数据集下载位置
-max_step = 3000
+max_step = 1000
 batch_size = 128
 data_dir = '/tmp/cifar10_data/cifar-10-batches-bin'
 
@@ -65,7 +66,7 @@ def loss(logits, labels):
 
 loss = loss(logits, label_holder)
 train_op = tf.train.AdamOptimizer(1e-3).minimize(loss)
-top_k_op = tf. nn.in_top_k(logits, label_holder, 1)
+top_k_op = tf.nn.in_top_k(logits, label_holder, 1)
 sess = tf.InteractiveSession()
 tf.global_variables_initializer().run()
 # 启动数据增强的队列线程
@@ -80,7 +81,7 @@ for step in range(max_step):
         examples_per_sec = batch_size / duration
         sec_per_batch = float(duration)
 
-        format_str=('step %d, loss=%.2f (%.1f examples / sec; %.3f sec / batch)')
+        format_str = ('step %d, loss=%.2f (%.1f examples / sec; %.3f sec / batch)')
         print(format_str % (step, loss_value, examples_per_sec, sec_per_batch))
 
 num_examples = 10000
