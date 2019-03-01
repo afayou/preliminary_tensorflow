@@ -6,7 +6,7 @@ import numpy as np
 import time
 
 # 定义训练轮数，每轮处理的数据量，数据集下载位置
-max_step = 1000
+max_step = 10000
 batch_size = 128
 data_dir = '/tmp/cifar10_data/cifar-10-batches-bin'
 
@@ -65,7 +65,7 @@ def loss(logits, labels):
     return tf.add_n(tf.get_collection('losses'), name='total_loss')
 
 loss = loss(logits, label_holder)
-train_op = tf.train.AdamOptimizer(1e-3).minimize(loss)
+train_op = tf.train.AdamOptimizer(0.5).minimize(loss)
 top_k_op = tf.nn.in_top_k(logits, label_holder, 1)
 sess = tf.InteractiveSession()
 tf.global_variables_initializer().run()

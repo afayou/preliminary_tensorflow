@@ -18,19 +18,22 @@ y = tf.nn.softmax(tf.matmul(x, w) + b)
 y_ = tf.placeholder(tf.float32, [None, 10])
 cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1]))
 # 随机梯度下降算法SGD，学习速率理解为梯度下降的步长
-train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)
+train_step = tf.train.GradientDescentOptimizer(0.1).minimize(cross_entropy)
 # 全局参数初始化
 tf.global_variables_initializer().run()
 # 执行训练，每次获取100个图像，执行1000次
 for i in range(1000):
-
-    if i % 100 == 0:
-        t = time.time()
-        print(int(round(t * 100)))
-        print(i / 1000)
-    batch_xs, batch_ys = mnist.train.next_batch(100)
+    batch_xs, batch_ys = mnist.train.next_batch(1024)
     train_step.run({x: batch_xs, y_: batch_ys})
 # 验证模型准确率
 correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
 accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 print(accuracy.eval({x: mnist.test.images, y_: mnist.test.labels}))
+
+
+A = [[0, 0, 1, 0, 1]]
+B = [[1, 3, 4], [2, 4, 1]]
+
+with tf.Session() as sess:
+    print(sess.run(tf.argmax(A, 1)))
+    print(sess.run(tf.argmax(B, 1)))

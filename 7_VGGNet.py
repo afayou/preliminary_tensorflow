@@ -12,7 +12,7 @@ def conv_op(input_op, name, kh, kw, n_out, dh, dw, p):
                                  initializer=tf.contrib.layers.xavier_initializer_conv2d())
         conv = tf.nn.conv2d(input_op, kernel, (1, dh, dw, 1), padding='SAME')
         bias_init_val = tf.constant(0.0, shape=[n_out], dtype=tf.float32)
-        biases = tf.Variable(bias_init_val ,trainable=True, name='b')
+        biases = tf.Variable(bias_init_val, trainable=True, name='b')
         z = tf.nn.bias_add(conv, biases)
         activation = tf.nn.relu(z, name=scope)
         p += [kernel, biases]
@@ -75,7 +75,7 @@ def inference_op(input_op, keep_prob):
     fc7 = fc_op(fc6_drop, name="fc7", n_out=4096, p=p)
     fc7_drop = tf.nn.dropout(fc7, keep_prob, name="fc6_drop")
 
-    fc8 = fc_op(fc7_drop, name="fc8", n_out=1000, p=p)
+    fc8 = fc_op(fc7_drop, name="fc8", n_out=2, p=p)
 
     softmax = tf.nn.softmax(fc8)
     predictions = tf.arg_max(softmax, 1)

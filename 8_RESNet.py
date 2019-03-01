@@ -6,6 +6,7 @@ import tensorflow as tf
 from datetime import datetime
 import math
 import time
+import matplotlib.pyplot as plt
 slim = tf.contrib.slim
 
 
@@ -242,16 +243,15 @@ def time_tensorflow_run(session, target, info_string):
     mn = total_duration / num_batches
     vr = total_duration_squared / num_batches - mn * mn
     sd = math.sqrt(vr)
-    print(end_points['predictions'].get_shape())
     print('%s: %s across %d steps, %.3f +/- %.3f sec / batch' %
           (datetime.now(), info_string, num_batches, mn, sd))
 
 
-batch_size = 32
-height, width = 24, 24
+batch_size = 128
+height, width = 224, 224
 inputs = tf.random_uniform((batch_size, height, width, 3))
 with slim.arg_scope(resnet_arg_scope(is_training=False)):
-    net, end_points = resnet_v2_200(inputs, 1000)  # 152层评测
+    net, end_points = resnet_v2_50(inputs, 2)  # 152层评测
 
 init = tf.global_variables_initializer()
 sess = tf.Session()
