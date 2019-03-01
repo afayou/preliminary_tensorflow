@@ -31,9 +31,3 @@ accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
 print(accuracy.eval({x: mnist.test.images, y_: mnist.test.labels}))
 
 
-A = [[0, 0, 1, 0, 1]]
-B = [[1, 3, 4], [2, 4, 1]]
-
-with tf.Session() as sess:
-    print(sess.run(tf.argmax(A, 1)))
-    print(sess.run(tf.argmax(B, 1)))
